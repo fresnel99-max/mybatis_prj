@@ -5,7 +5,7 @@
 <mapper namespace="kr.co.sist.board">
 
 <!-- board테이블에 추가 작업 -->
-  <insert id="insertBoard" parameterType="boardDomain">
+  <insert id="insertBoard" parameterType="boardDTO">
   insert into board(num, title,content,ip,id)values
   	( seq_board.nextval,#{title}, #{content}, #{ip}, #{id} )
   </insert>
@@ -35,5 +35,31 @@
 		)where rnum between #{startNum} and #{endNum}
   </select>
   
+  <!-- 글 번호를 받아서 해당하는 글 하나를 검색.  -->
+  <select id="selectBoardDetail" parameterType="int" resultType="boardDomain">
+ 	select title, content, input_date, ip, cnt, id	
+	from board										
+	where num = #{num}
+  </select>
+  
+ <!-- 글 번호를 받아서 해당 글의 카운터를 증가 --> 
+<update id="updateBoardCnt" parameterType="int">
+	update	board
+	set		cnt=cnt+1	
+	where num = #{num}
+</update>
+
+<!-- 글번호와 아이디를 입력받아서 해당 글에 내용과 ip를 변경 -->
+<update id="updateBoard" parameterType="boardDTO">
+	update	board			
+	set		title=#{title}, content=#{content}, ip=#{ip}, input_date=sysdate
+	where	num=#{num}	and id=#{id}
+</update>
+  
+  <!--글번호와 아이디를 입력받아서 해당 글을 삭제  -->
+  <delete id="deleteBoard" parameterType="boardDTO">
+  	delete from	board		
+	where	num=#{num}	and id=#{id}
+  </delete>
  
 </mapper>
