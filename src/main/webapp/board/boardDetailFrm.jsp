@@ -160,11 +160,13 @@ $(function(){
 					</tr>
 					<tr>
 					<td colspan="2" style="text-align: center;">
-						<c:if test="${ sessionScope.userId eq bDTO.id}">
+						<%-- <c:if test="${ sessionScope.userId eq bDTO.id}"> --%>
 						<input type="hidden" name="num" value="${ param.num }"/>
+						<!-- 작성자의 아이디를 넣었다.	 -->
+						<input type="hidden" name="id" value="${ bDTO.id }"/>
 						<button onclick="return false" class="btn btn-success" id="btnModify">글수정</button>
 						<button onclick="return false" class="btn btn-success" id="btnDelete">글삭제</button>
-						</c:if>
+						<%-- </c:if> --%>
 						<a href="boardList.jsp?currentPage=${ param.currentPage }" class="btn btn-info" >리스트</a>
 					</td>
 					</tr>

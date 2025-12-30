@@ -6,12 +6,11 @@
 <%
 request.setCharacterEncoding("UTF-8");
 %>
-<jsp:useBean id="bDTO" class="kr.co.sist.board.BoardDomain" scope="page"/>
+<jsp:useBean id="bDTO" class="kr.co.sist.board.BoardDTO" scope="page"/>
 <jsp:setProperty name="bDTO" property="*"/>
 <%
  //web parameter로 title,content입력되고
 //그외, IP-request내장객체 , ID session에서 얻어야한다.
-bDTO.setId( (String)session.getAttribute("userId"));
 
 BoardService bs=BoardService.getInstance();
 boolean flag=bs.removeBoard(bDTO);
